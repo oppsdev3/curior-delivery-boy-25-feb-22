@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core';
 import React from 'react'
-import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import AntDesign from "react-native-vector-icons/AntDesign";
 import FontAwesome from "react-native-vector-icons/FontAwesome"
 import Entypo from "react-native-vector-icons/Entypo";
@@ -29,10 +29,9 @@ const ProfileDetailScreen = () => {
             </View>
             <View style={styles.content}>
                 <View style={{marginTop:"-10%",width:"80%",flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
-                    <Ionicons
-                    name="person-circle"
-                    size={100}
-                    color="gray"
+                    <Image
+                    source={{uri: user.imageUrl}}
+                    style={{height:100, width:100, resizeMode:"contain", borderRadius:100}}
                     />
                 </View>
                 <View style={{alignItems:"flex-start", width:"90%"}}>

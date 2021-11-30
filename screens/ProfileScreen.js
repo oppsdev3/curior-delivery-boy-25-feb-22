@@ -29,7 +29,7 @@ const ProfileScreen = () => {
                 onPress={()=>navigation.navigate("ProfileDetails")}
                 activeOpacity={0.8} style={{flexDirection:"row", alignItems:"center", marginVertical:20}}>
                     <Image
-                    source={require("../assets/zayn.jpg")}
+                    source={{uri: user.imageUrl}}
                     style={{height: 60, width:60, resizeMode:"contain", borderRadius:100, marginRight:10}}
                     />
                     <View style={{}}>
