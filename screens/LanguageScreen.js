@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {useNavigation} from "@react-navigation/core"
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome"
+import { RalewayBold, RalewaySemiBold } from '../components/fonts';
 
 const LanguageScreen = () => {
 
@@ -17,35 +18,35 @@ const LanguageScreen = () => {
     return (
         <View style={styles.screen}>
             <View style={styles.header}>
-                <Text style={{fontSize:20, color:"white", fontWeight:"bold"}}>Select Language</Text>
+                <Text style={{fontSize:20, color:"white", fontFamily:RalewayBold}}>Select Language</Text>
             </View>
             <View style={styles.content}>
-                <Text style={{fontSize:18, color:"gray"}}>Select Language</Text>
+                <Text style={{fontSize:18, color:"gray", fontFamily:RalewaySemiBold}}>Select Language</Text>
                 <TouchableOpacity activeOpacity={0.8} style={styles.box}
                 onPress={()=>setLang("English")}
                 >
-                    <Text style={{fontSize:18, fontWeight:"bold", color:"black"}}>English</Text>
+                    <Text style={{fontSize:18, fontFamily:RalewayBold, color:"black"}}>English</Text>
                     <FontAwesomeIcon
                     name={(lang==="English") ? "dot-circle-o":"circle-o"}
                     size={24}
-                    color={(lang==="English") ? "#fcb000":"gray"}
+                    color={(lang==="English") ? "#fdb916":"gray"}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={0.8} style={styles.box}
                 onPress={()=>setLang("Hindi")}
                 >
-                    <Text style={{fontSize:18, fontWeight:"bold", color:"black"}}>हिंदी</Text>
+                    <Text style={{fontSize:18, fontFamily:RalewayBold, color:"black"}}>हिंदी</Text>
                     <FontAwesomeIcon
                      name={(lang==="Hindi") ? "dot-circle-o":"circle-o"}
                     size={24}
-                    color={(lang==="Hindi") ? "#fcb000":"gray"}
+                    color={(lang==="Hindi") ? "#fdb916":"gray"}
                     />
                 </TouchableOpacity>
             </View>
             <TouchableOpacity activeOpacity={0.8} style={styles.button}
             onPress={submitHandler}
             >
-                <Text style={{fontSize:20, color:"white", fontWeight:"bold"}}>Confirm</Text>
+                <Text style={{fontSize:20, color:"white", fontFamily:RalewaySemiBold}}>Confirm</Text>
             </TouchableOpacity>
         </View>
     )
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
         backgroundColor:"lightgray"
     },
     header:{
-        backgroundColor:"#fcb000",
+        backgroundColor:"#fdb916",
         alignItems:"center",
         padding:20
     },
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
         marginVertical:10
     },
     button:{
-        backgroundColor:"#fcb000",
+        backgroundColor:"#fdb916",
         alignItems:"center",
         padding:20,
         borderRadius:10,

@@ -16,6 +16,8 @@ import { store } from './redux/store';
 import ContactScreen from './screens/ContactScreen';
 import TermsAndConditions from './screens/TermsAndConditions';
 import ProfileDetailScreen from './screens/ProfileDetailScreen';
+import MapScreen from './screens/MapScreen';
+import UpdateLanguageScreen from './screens/UpdateLanguageScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -38,6 +40,8 @@ function App(){
           <Stack.Screen name="Contact" component={ContactScreen}/>
           <Stack.Screen name="T&C" component={TermsAndConditions}/>
           <Stack.Screen name="ProfileDetails" component={ProfileDetailScreen}/>
+          <Stack.Screen name="Map" component={MapScreen}/>
+          <Stack.Screen name="Update Language" component={UpdateLanguageScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
@@ -58,7 +62,7 @@ function CustomNavigator(){
           <Entypo
           name="home"
           size={28}
-          color={focused ? "#fcb000": "black"}
+          color={focused ? "#fdb916": "black"}
           />
         )}
       }
@@ -70,7 +74,7 @@ function CustomNavigator(){
           <Entypo
           name="wallet"
           size={28}
-          color={focused ? "#fcb000": "black"}
+          color={focused ? "#fdb916": "black"}
           />
         )}
       }
@@ -82,7 +86,7 @@ function CustomNavigator(){
           <Fontisto
           name="person"
           size={28}
-          color={focused ? "#fcb000": "black"}
+          color={focused ? "#fdb916": "black"}
           />
         )}
       }

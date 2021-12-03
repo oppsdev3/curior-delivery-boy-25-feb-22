@@ -1,13 +1,20 @@
+ import { useNavigation } from '@react-navigation/core';
 import React from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
 import Entypo from "react-native-vector-icons/Entypo"
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { RalewayBold, RalewaySemiBold } from './fonts';
 
 const {width} = Dimensions.get("window");
 
 const DeliveryItem = ({imgSrc, title, price, from, to, type, modeOfPayment, buttonText}) => {
+    
+    const navigation = useNavigation();
+    
     return (
-        <View style={styles.container}>
+        <TouchableOpacity activeOpacity={0.8} style={styles.container}
+        onPress={()=>navigation.navigate("Map", {"imgSrc": imgSrc, "title": title, "from": from, "to": to, "type": type, "buttonText": buttonText, "price": price, "modeOfPayment": modeOfPayment})}
+        >
             <View style={{padding:20}}>
                 <View style={{flexDirection:"row", alignItems:"flex-start", justifyContent:"space-between"}}>
                     <View style={{flexDirection:"row", alignItems:"flex-start"}}>
@@ -16,45 +23,45 @@ const DeliveryItem = ({imgSrc, title, price, from, to, type, modeOfPayment, butt
                         style={{height: 40, width:40, resizeMode:"contain"}}
                         />
                         <View style={{marginLeft:10}}>
-                            <Text style={{fontSize:18, fontWeight:"bold", color:"black"}}>{title}</Text>
-                            <Text style={{fontSize:16, color:"gray"}}>{type}</Text>
+                            <Text style={{fontSize:18, fontFamily:RalewayBold, color:"black"}}>{title}</Text>
+                            <Text style={{fontSize:16, color:"gray", fontFamily:RalewaySemiBold}}>{type}</Text>
                             <View style={{marginVertical:10}}>
-                                <Text style={{fontSize:15, color:"gray", marginBottom:5}}>Payment Mode</Text>
-                                <Text style={{fontSize:16, color:"black", fontWeight:"bold"}}>{modeOfPayment}</Text>
+                                <Text style={{fontSize:15, color:"gray", marginBottom:5, fontFamily:RalewaySemiBold}}>Payment Mode</Text>
+                                <Text style={{fontSize:14, color:"black", fontWeight:"bold", fontFamily:RalewaySemiBold}}>{modeOfPayment}</Text>
                             </View>
                         </View>
                     </View>
                     <View style={{}}>
-                        <TouchableOpacity activeOpacity={0.8} style={{marginBottom:10,backgroundColor:"#fbc000", padding:10, borderRadius:10, alignItems:"center"}}>
-                            <Text style={{fontSize:15, color:"white", fontWeight:"bold"}}>{buttonText}</Text>
+                        <TouchableOpacity activeOpacity={0.8} style={{marginBottom:10,backgroundColor:"#fdb916", padding:10, borderRadius:10, alignItems:"center"}}>
+                            <Text style={{fontSize:15, color:"white", fontFamily:RalewayBold}}>{buttonText}</Text>
                         </TouchableOpacity>
-                        <Text style={{fontSize:15, color:"gray",marginVertical:5}}>Payment</Text>
-                        <Text style={{fontSize:16, color:"black", fontWeight:"bold"}}>₹ {price}</Text>
+                        <Text style={{fontSize:15, color:"gray",marginVertical:5, fontFamily:RalewaySemiBold}}>Payment</Text>
+                        <Text style={{fontSize:16, color:"black", fontFamily:RalewayBold}}>₹ {price}</Text>
                     </View>
                 </View>
             </View>
             <View style={styles.footer}>
-                <Text style={{fontWeight:"bold", fontSize:15, color:"black", maxWidth:width-290}}
+                <Text style={{fontFamily:RalewayBold, fontSize:15, color:"black", maxWidth:width-290}}
                 numberOfLines={1}
                 >{from}</Text>
                 <View style={{flexDirection:"row", alignItems:"center",justifyContent:"center"}}>
                     <Entypo
                     name="location-pin"
                     size={24}
-                    color="#fcb000"
+                    color="#fdb916"
                     />
-                    <Text style={{fontSize:16, color:"gray", fontWeight:"bold", marginHorizontal:5}}>......</Text>
+                    <Text style={{fontSize:16, color:"gray", fontFamily:RalewayBold, marginHorizontal:5}}>......</Text>
                     <FontAwesome5
                     name="location-arrow"
                     size={20}
-                    color="#fbc000"
+                    color="#fdb916"
                     />
                 </View>
-                <Text style={{fontWeight:"bold", fontSize:15, color:"black", maxWidth:width-250}}
+                <Text style={{fontFamily:RalewayBold, fontSize:15, color:"black", maxWidth:width-250}}
                 numberOfLines={1}
                 >{to}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
@@ -73,6 +80,8 @@ const styles = StyleSheet.create({
         alignItems:"center",
         justifyContent:"space-between",
         backgroundColor:"whitesmoke",
-        padding:10
+        padding:10,
+        borderBottomEndRadius:20,
+        borderBottomLeftRadius:20
     }
 })

@@ -3,8 +3,10 @@ import { StyleSheet, ToucTouchableOpacity, hableOpacity, View, Text, TouchableOp
 import { useSelector } from 'react-redux'
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from '@react-navigation/core';
+import { RalewayBold, RalewayLight, RalewayRegular, RalewaySemiBold } from '../components/fonts';
 
 
 const ProfileScreen = () => {
@@ -13,28 +15,33 @@ const ProfileScreen = () => {
     const navigation = useNavigation();
 
     const logoutHandler=()=>{
-        // navigation.navigate("SignUp")
+        navigation.navigate("Language")
     }
 
     return (
         <View style={styles.screen}>
             <View style={styles.header}>
-                <View style={{flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
-                    <Text style={{fontSize:20, color:"white", fontWeight:"bold"}}>Account</Text>
-                    <TouchableOpacity activeOpacity={0.8} style={{backgroundColor:"white", borderRadius:10, padding:10}}>
-                        <Text style={{fontWeight:"bold", fontSize:18, color:"#fcb000"}}>Buy this App</Text>
-                    </TouchableOpacity>
+                <View style={{alignItems: 'center'}}>
+                    <Text style={{fontSize:22, color:"white", fontFamily: RalewaySemiBold}}>Account</Text>
                 </View>
                 <TouchableOpacity 
                 onPress={()=>navigation.navigate("ProfileDetails")}
                 activeOpacity={0.8} style={{flexDirection:"row", alignItems:"center", marginVertical:20}}>
+                    {user.imageUrl ? 
                     <Image
                     source={{uri: user.imageUrl}}
                     style={{height: 60, width:60, resizeMode:"contain", borderRadius:100, marginRight:10}}
                     />
-                    <View style={{}}>
-                        <Text style={{fontSize:23, fontWeight:"bold", color:"white"}}>{user.name}</Text>
-                        <Text style={{fontSize:17, fontWeight:"bold", color:"white", marginTop:5}}>View Profile</Text>
+                    :
+                    <Ionicons
+                    name="person-circle-outline"
+                    size={60}
+                    color="white"
+                    />
+                    }
+                    <View style={{marginLeft:10, marginTop:-10}}>
+                        <Text style={{fontSize:23, color:"white", fontFamily:RalewaySemiBold}}>{user.name}</Text>
+                        <Text style={{fontSize:17, color:"white", marginTop:5, fontFamily:RalewaySemiBold}}>View Profile</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -45,22 +52,24 @@ const ProfileScreen = () => {
                     <FontAwesome
                     name="envelope"
                     size={26}
-                    color="#fcb000"
+                    color="#fdb916"
                     />
-                    <View style={{marginLeft:20}}>
-                        <Text style={{fontWeight:"bold", fontSize:25, color:"black", marginBottom:5}}>Contact Us</Text>
-                        <Text style={{fontSize:16,color:"gray", fontWeight:"800"}}>Contact us for any query & issue</Text>
+                    <View style={{marginLeft:20, marginTop:-10}}>
+                        <Text style={{fontSize:25, color:"black", marginBottom:5, fontFamily:RalewayBold}}>Contact Us</Text>
+                        <Text style={{fontSize:16,color:"lightgray", fontFamily:RalewaySemiBold}}>Contact us for any query & issue</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity activeOpacity={0.8} style={{flexDirection:"row", alignItems:"flex-start", marginVertical:20}}>
+                <TouchableOpacity
+                onPress={()=>navigation.navigate("Update Language")}
+                activeOpacity={0.8} style={{flexDirection:"row", alignItems:"flex-start", marginVertical:20}}>
                     <Entypo
                     name="globe"
                     size={26}
-                    color="#fcb000"
+                    color="#fdb916"
                     />
-                    <View style={{marginLeft:20}}>
-                        <Text style={{fontWeight:"bold", fontSize:25, color:"black", marginBottom:5}}>Changing Language</Text>
-                        <Text style={{fontSize:16,color:"gray", fontWeight:"800"}}>Select Language</Text>
+                    <View style={{marginLeft:20, marginTop:-10}}>
+                        <Text style={{fontSize:25, color:"black", marginBottom:5, fontFamily:RalewayBold}}>Changing Language</Text>
+                        <Text style={{fontSize:16,color:"lightgray", fontFamily:RalewaySemiBold}}>Select Language</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity 
@@ -69,22 +78,22 @@ const ProfileScreen = () => {
                     <Entypo
                     name="calendar"
                     size={26}
-                    color="#fcb000"
+                    color="#fdb916"
                     />
-                    <View style={{marginLeft:20}}>
-                        <Text style={{fontWeight:"bold", fontSize:25, color:"black", marginBottom:5}}>Terms & Conditions</Text>
-                        <Text style={{fontSize:16,color:"gray", fontWeight:"800"}}>Know our Terms & Conditions</Text>
+                    <View style={{marginLeft:20, marginTop:-10}}>
+                        <Text style={{fontSize:25, color:"black", marginBottom:5, fontFamily:RalewayBold}}>Terms & Conditions</Text>
+                        <Text style={{fontSize:16,color:"lightgray", fontFamily:RalewaySemiBold}}>Know our Terms & Conditions</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={0.8} style={{flexDirection:"row", alignItems:"flex-start", marginVertical:20}}>
                     <Entypo
                     name="share"
                     size={26}
-                    color="#fcb000"
+                    color="#fdb916"
                     />
-                    <View style={{marginLeft:20}}>
-                        <Text style={{fontWeight:"bold", fontSize:25, color:"black", marginBottom:5}}>Share App</Text>
-                        <Text style={{fontSize:16,color:"gray", fontWeight:"800"}}>Share with Friends & Family</Text>
+                    <View style={{marginLeft:20, marginTop:-10}}>
+                        <Text style={{fontSize:25, color:"black", marginBottom:5, fontFamily:RalewayBold}}>Share App</Text>
+                        <Text style={{fontSize:16,color:"lightgray", fontFamily:RalewaySemiBold}}>Share with Friends & Family</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -93,11 +102,11 @@ const ProfileScreen = () => {
                     <MaterialCommunityIcons
                     name="logout"
                     size={26}
-                    color="#fcb000"
+                    color="#fdb916"
                     />
-                    <View style={{marginLeft:20}}>
-                        <Text style={{fontWeight:"bold", fontSize:25, color:"black", marginBottom:5}}>Logout</Text>
-                        <Text style={{fontSize:16,color:"gray", fontWeight:"800"}}>Signout from Current Account</Text>
+                    <View style={{marginLeft:20, marginTop:-10}}>
+                        <Text style={{fontFamily:RalewayBold, fontSize:25, color:"black", marginBottom:5}}>Logout</Text>
+                        <Text style={{fontSize:16,color:"lightgray", fontFamily:RalewaySemiBold}}>Signout from Current Account</Text>
                     </View>
                 </TouchableOpacity>
             </ScrollView>
@@ -109,7 +118,7 @@ export default ProfileScreen
 
 const styles = StyleSheet.create({
     screen:{
-        backgroundColor:"#fcb000",
+        backgroundColor:"#fdb916",
         flex:1
     },
     header:{

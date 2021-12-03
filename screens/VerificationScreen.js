@@ -3,6 +3,7 @@ import React from 'react'
 import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useState } from 'react/cjs/react.development';
+import { RalewayBold, RalewaySemiBold } from '../components/fonts';
 
 const {width, height} = Dimensions.get("window")
 
@@ -28,35 +29,35 @@ const VerificationScreen = () => {
                         style={{alignSelf:"flex-start"}}
                         />
                     </TouchableOpacity>
-                    <Text style={{fontSize:20, color:"white", fontWeight:"bold"}}>Verification</Text>
+                    <Text style={{fontSize:20, color:"white", fontFamily:RalewayBold}}>Verification</Text>
                 </View>
                 <View style={{marginBottom:20}}>
-                    <Text style={{fontSize:20, color:"white"}} numberOfLines={2}>Enter 6 digit verification code sent on {route.params.number}</Text>
+                    <Text style={{fontSize:20, color:"white", fontFamily:RalewaySemiBold}} numberOfLines={2}>Enter 6 digit verification code sent on {route.params.number}</Text>
                 </View>
                 <View style={{flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
-                    <Text style={{fontSize:20, color:"white"}}>2:23 min</Text>
+                    <Text style={{fontSize:20, color:"white", fontFamily:RalewaySemiBold}}>2:23 min</Text>
                     <TouchableOpacity style={{borderRadius:10, elevation:5, backgroundColor:"whitesmoke", padding:10}} activeOpacity={0.8}>
-                        <Text style={{fontSize:20, color:"#fcb000", fontWeight:"bold"}}>Resend OTP</Text>
+                        <Text style={{fontSize:20, color:"#fdb916", fontFamily:RalewayBold}}>Resend OTP</Text>
                     </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.content}>
                 <View style={{alignItems:"flex-start", width:"90%", marginVertical:20}}>
                     <View style={{borderBottomColor:"gray", borderBottomWidth:1, width:"100%"}}>
-                        <Text style={{fontSize:20, fontWeight:"bold", color:"black"}}>Enter OTP</Text>
+                        <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black"}}>Enter OTP</Text>
                         <TextInput
                         placeholderTextColor="gray"
                         placeholder="Enter 6 Digits Verification Code"
                         value={OTP}
                         onChangeText={(text)=>setOTP(text)}
                         keyboardType="number-pad"
-                        style={{fontSize:20, color:"black"}}
+                        style={{fontSize:20, color:"black", fontFamily:RalewaySemiBold}}
                         />
                     </View>
                 </View>
                 <TouchableOpacity activeOpacity={0.8} style={styles.button}
                 onPress={submitHandler}>
-                    <Text style={{fontSize:20, color:"white", fontWeight:"bold"}}>Submit</Text>
+                    <Text style={{fontSize:20, color:"white", fontFamily:RalewaySemiBold}}>Submit</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -68,7 +69,7 @@ export default VerificationScreen;
 const styles = StyleSheet.create({
     screen:{
         flex:1,
-        backgroundColor:"#fcb000"
+        backgroundColor:"#fdb916"
     },
     header:{
         marginVertical: 20,
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
         width:"100%"
     },
     button:{
-        backgroundColor:"#fcb000",
+        backgroundColor:"#fdb916",
         alignItems:"center",
         padding:20,
         width:"100%",

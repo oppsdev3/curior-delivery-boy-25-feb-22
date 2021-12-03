@@ -2,6 +2,7 @@ import React from 'react'
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useState } from 'react/cjs/react.development'
 import DeliveryItem from '../components/DeliveryItem';
+import { RalewayBold, RalewaySemiBold } from '../components/fonts';
 
 const DeliveriesScreen = () => {
 
@@ -13,17 +14,17 @@ const DeliveriesScreen = () => {
                 <TouchableOpacity activeOpacity={0.8}
                 onPress={()=>setClick("New Deliveries")}
                 >
-                    <Text style={{opacity:(click==="New Deliveries")? 1: 0.5, color:"white", fontSize:22, fontWeight:"bold"}}>New Deliveries</Text>
+                    <Text style={{opacity:(click==="New Deliveries")? 1: 0.5, color:"white", fontSize:22, fontFamily:RalewayBold}}>New Deliveries</Text>
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={0.8}
                 onPress={()=>setClick("Delivered")}
                 >
-                    <Text style={{opacity:(click==="Delivered")? 1: 0.5, color:"white", fontSize:22, fontWeight:"bold"}}>Delivered</Text>
+                    <Text style={{opacity:(click==="Delivered")? 1: 0.5, color:"white", fontSize:22, fontFamily:RalewayBold}}>Delivered</Text>
                 </TouchableOpacity>
             </View>
             {(click==="New Deliveries")?
             <View style={styles.content}>
-                <Text style={{fontSize:18, color:"gray", padding:20}}>3 Active Deliveries</Text>
+                <Text style={{fontSize:18, color:"gray", padding:20, fontFamily:RalewaySemiBold}}>3 Active Deliveries</Text>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <DeliveryItem
                     title="Courier"
@@ -69,7 +70,7 @@ const DeliveriesScreen = () => {
             </View>
             :
             <View style={styles.content}>
-                <Text style={{fontSize:18, color:"gray", padding:20}}>Past Deliveries</Text>
+                <Text style={{fontSize:18, color:"gray", padding:20, fontFamily:RalewaySemiBold}}>Past Deliveries</Text>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <DeliveryItem
                     title="Courier"
@@ -121,7 +122,7 @@ export default DeliveriesScreen
 
 const styles = StyleSheet.create({
     screen:{
-        backgroundColor: "#fcb000",
+        backgroundColor: "#fdb916",
         flex:1
     },
     header:{

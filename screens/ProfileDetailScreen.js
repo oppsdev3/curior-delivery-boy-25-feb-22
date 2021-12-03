@@ -29,10 +29,18 @@ const ProfileDetailScreen = () => {
             </View>
             <View style={styles.content}>
                 <View style={{marginTop:"-10%",width:"80%",flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
+                    {user.imageUrl?
                     <Image
                     source={{uri: user.imageUrl}}
                     style={{height:100, width:100, resizeMode:"contain", borderRadius:100}}
                     />
+                    :
+                    <Ionicons
+                    name="person-circle"
+                    size={100}
+                    color="gray"
+                    />
+                    }
                 </View>
                 <View style={{alignItems:"flex-start", width:"90%"}}>
                     <View style={{borderBottomColor:"gray", borderBottomWidth:1, width:"100%", marginVertical:20}}>

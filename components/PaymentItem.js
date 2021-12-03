@@ -1,5 +1,6 @@
 import React from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { RalewayBold, RalewayRegular, RalewaySemiBold } from './fonts'
 
 const PaymentItem = ({price, title, imgSrc, type}) => {
     return (
@@ -11,19 +12,19 @@ const PaymentItem = ({price, title, imgSrc, type}) => {
                     style={{height:40, width:40, resizeMode:"contain", marginRight:10}}
                     />
                     <View>
-                        <Text style={{fontSize:14, fontWeight:"bold",color:"black"}}>{title}</Text>
-                        <Text style={{fontSize:13, color:"gray"}}>{type}</Text>
+                        <Text style={{fontSize:15, fontFamily:RalewayBold,color:"black"}}>{title}</Text>
+                        <Text style={{fontSize:11, color:"gray", fontFamily:RalewaySemiBold}}>{type}</Text>
                     </View>
                 </View>
             </View>
             <View style={{flexDirection:"row", alignItems:"center"}}>
                 <View style={{alignItems:"flex-end"}}>
-                    <Text style={{fontSize:14, color:"gray", fontWeight:"bold"}}>₹ {price}</Text>
-                    <Text style={{fontSize:13, fontWeight:"bold", color:"black", marginTop:5}}>Paid via Paypal</Text>
+                    <Text style={{fontSize:14, color:"gray", fontFamily:RalewaySemiBold}}>₹ {price}</Text>
+                    <Text style={{fontSize:11, fontFamily:RalewaySemiBold, color:"black", marginTop:5}}>Paid via Paypal</Text>
                 </View>
                 <View style={{marginLeft:10, alignItems:"flex-end"}}>
-                    <Text style={{fontSize:14, color:"gray", fontWeight:"bold"}}>₹ 3.50</Text>
-                    <Text style={{fontSize:13, fontWeight:"bold", color:"black", marginTop:5}}>Earned</Text>
+                    <Text style={{fontSize:14, color:"gray", fontFamily:RalewaySemiBold}}>₹ 3.50</Text>
+                    <Text style={{fontSize:11, fontFamily:RalewaySemiBold, color:"black", marginTop:5}}>Earned</Text>
                 </View>
             </View>
         </TouchableOpacity>

@@ -9,6 +9,7 @@ import { useState } from 'react/cjs/react.development';
 import {useDispatch} from "react-redux"
 import { add_user } from '../redux/userAction';
 import ImagePicker from 'react-native-image-crop-picker';
+import { RalewayBold, RalewaySemiBold } from '../components/fonts';
 
 
 const {width, height} = Dimensions.get("window")
@@ -22,15 +23,15 @@ const RegisterScreen = () => {
     const route = useRoute();
     const [image, setImage]=  useState("");
 
-    const photoHandler=()=>{
-        ImagePicker.openPicker({
-            width: 400,
-            height: 400,
-            cropping: true
-          }).then(image => {
-            setImage(image.path)
-          });
-    }
+    // const photoHandler=()=>{
+    //     ImagePicker.openPicker({
+    //         width: 400,
+    //         height: 400,
+    //         cropping: true
+    //       }).then(image => {
+    //         setImage(image.path)
+    //       });
+    // }
 
     const aadhaarCardHandler=()=>{
         ImagePicker.openPicker({
@@ -75,11 +76,11 @@ const RegisterScreen = () => {
                 style={{alignSelf:"flex-start"}}
                 />
                 </TouchableOpacity>
-                <Text style={{fontSize:20, color:"white", fontWeight:"bold"}}>Register</Text>
+                <Text style={{fontSize:20, color:"white", fontFamily:RalewayBold}}>Register</Text>
             </View>
             <View style={styles.content}>
                 <View style={{marginTop:"-8%",width:"80%",flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
-                    <TouchableOpacity activeOpacity={0.8}
+                    {/* <TouchableOpacity activeOpacity={0.8}
                     onPress={photoHandler}
                     >
                         <FontAwesome
@@ -87,16 +88,20 @@ const RegisterScreen = () => {
                         size={30}
                         color="#fcb000"
                         />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+                    <View>
+
+                    </View>
                     {image ? 
                     <Image
                     source={{uri: image}}
                     style={{height:100, width:120, resizeMode:"contain", borderRadius:100}}
                     />
                     :
-                    <Image
-                    source={require("../assets/zayn.jpg")}
-                    style={{height:100, width:100, resizeMode:"contain", borderRadius:100}}
+                    <Ionicons
+                    name="person-circle"
+                    size={100}
+                    color="gray"
                     />
                     }
                     <TouchableOpacity activeOpacity={0.8}
@@ -105,48 +110,48 @@ const RegisterScreen = () => {
                         <Entypo
                         name="camera"
                         size={30}
-                        color="#fcb000"
+                        color="#fdb916"
                         />
                     </TouchableOpacity>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} style={{width:"90%"}}>
                     <View style={{alignItems:"flex-start"}}>
                         <View style={{borderBottomColor:"gray", borderBottomWidth:1, width:"100%"}}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"black"}}>Full Name</Text>
+                            <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black"}}>Full Name</Text>
                             <TextInput
                             placeholderTextColor="gray"
                             placeholder="Enter Full Name"
                             value={name}
                             onChangeText={(text)=>setName(text)}
                             keyboardType="default"
-                            style={{fontSize:20, color:"black"}}
+                            style={{fontSize:20, color:"black", fontFamily:RalewaySemiBold}}
                             />
                         </View>
                         <View style={{borderBottomColor:"gray", borderBottomWidth:1, width:"100%", marginVertical:20}}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"black"}}>Email Address</Text>
+                            <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black"}}>Email Address</Text>
                             <Text
-                            style={{fontSize:20, color:"gray", paddingVertical:10}}
+                            style={{fontSize:20, color:"gray", paddingVertical:10, fontFamily:RalewaySemiBold}}
                             >{route.params.email}</Text>
                         </View>
                         <View style={{width:"100%", marginBottom:20}}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"black", marginBottom:5}}>Aadhaar Card</Text>
+                            <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black", marginBottom:5}}>Aadhaar Card</Text>
                             {aadhaar ? <Image source={{uri:aadhaar}} style={{height:100, width:"100%", resizeMode:"contain", borderRadius:20}}/>
                             :<TouchableOpacity activeOpacity={0.8} onPress={aadhaarCardHandler} style={{backgroundColor:"white",elevation:5, borderRadius:10, padding:5, paddingHorizontal:10}}>
-                                <Text style={{fontSize:16, color:"gray", paddingVertical:5}}>Choose Photo From Gallery</Text>
+                                <Text style={{fontSize:16, color:"gray", paddingVertical:5, fontFamily:RalewaySemiBold}}>Choose Photo From Gallery</Text>
                             </TouchableOpacity>
                             }
                         </View>
                         <View style={{borderBottomColor:"gray", borderBottomWidth:1, width:"100%"}}>
-                            <Text style={{fontSize:20, fontWeight:"bold", color:"black"}}>Phone Number</Text>
+                            <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black"}}>Phone Number</Text>
                             <Text
-                            style={{fontSize:20, color:"gray", paddingVertical:10}}
+                            style={{fontSize:20, color:"gray", paddingVertical:10, fontFamily:RalewaySemiBold}}
                             >{route.params.number}</Text>
                         </View>
                     </View>
                 </ScrollView>
                 <TouchableOpacity activeOpacity={0.8} style={styles.button}
                 onPress={submitHandler}>
-                    <Text style={{fontSize:20, color:"white", fontWeight:"bold"}}>Continue</Text>
+                    <Text style={{fontSize:20, color:"white", fontFamily:RalewaySemiBold}}>Continue</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -158,7 +163,7 @@ export default RegisterScreen
 const styles = StyleSheet.create({
     screen:{
         flex:1,
-        backgroundColor:"#fcb000"
+        backgroundColor:"#fdb916"
     },
     header:{
         marginVertical: 30,
@@ -177,7 +182,7 @@ const styles = StyleSheet.create({
         width:"100%"
     },
     button:{
-        backgroundColor:"#fcb000",
+        backgroundColor:"#fdb916",
         alignItems:"center",
         padding:20,
         width:"100%",

@@ -1,6 +1,7 @@
 import React from 'react'
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useState } from 'react/cjs/react.development'
+import { RalewayBold, RalewaySemiBold } from '../components/fonts'
 import PaymentItem from '../components/PaymentItem'
 
 const WalletScreen = () => {
@@ -8,11 +9,11 @@ const WalletScreen = () => {
     return (
         <View style={styles.screen}>
             <View style={styles.header}>
-                <Text style={{fontSize:25, color:"white", fontWeight:"bold"}}>Earnings</Text>
-                <Text style={{fontSize:40, color:"white", fontWeight:"bold", marginVertical:15}}>₹ 178.20</Text>
+                <Text style={{fontSize:25, color:"white", fontFamily:RalewaySemiBold}}>Earnings</Text>
+                <Text style={{fontSize:40, color:"white", fontFamily:RalewayBold, marginVertical:15}}>₹ 178.20</Text>
             </View>
             <View style={styles.content}>
-                <Text style={{color:"gray", fontWeight:"bold", fontSize:18, padding:10}}>Recent Transaction</Text>
+                <Text style={{color:"gray", fontFamily:RalewaySemiBold, fontSize:18, padding:10}}>Recent Transactions</Text>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <PaymentItem
                     title="Food Delivered"
@@ -66,7 +67,7 @@ export default WalletScreen
 
 const styles = StyleSheet.create({
     screen:{
-        backgroundColor: "#fcb000",
+        backgroundColor: "#fdb916",
         flex:1
     },
     header:{
