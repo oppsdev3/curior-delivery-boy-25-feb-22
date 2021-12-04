@@ -1,6 +1,5 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { useState } from 'react/cjs/react.development'
 import DeliveryItem from '../components/DeliveryItem';
 import { RalewayBold, RalewaySemiBold } from '../components/fonts';
 

@@ -1,11 +1,10 @@
 import { useNavigation, useRoute } from '@react-navigation/core';
-import React from 'react'
+import React, {useState} from 'react'
 import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ScrollView } from 'react-native'
 import AntDesign from "react-native-vector-icons/AntDesign";
 import FontAwesome from "react-native-vector-icons/FontAwesome"
 import Entypo from "react-native-vector-icons/Entypo";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { useState } from 'react/cjs/react.development';
 import {useDispatch} from "react-redux"
 import { add_user } from '../redux/userAction';
 import ImagePicker from 'react-native-image-crop-picker';

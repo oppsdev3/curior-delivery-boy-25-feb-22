@@ -1,8 +1,7 @@
 import { useNavigation, useRoute } from '@react-navigation/core';
-import React from 'react'
+import React, {useState} from 'react'
 import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { useState } from 'react/cjs/react.development';
 import { RalewayBold, RalewaySemiBold } from '../components/fonts';
 
 const {width, height} = Dimensions.get("window")
