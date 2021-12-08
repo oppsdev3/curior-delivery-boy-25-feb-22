@@ -9,6 +9,7 @@ import {useDispatch} from "react-redux"
 import { add_user } from '../redux/userAction';
 import ImagePicker from 'react-native-image-crop-picker';
 import { RalewayBold, RalewaySemiBold } from '../components/fonts';
+import { Picker } from '@react-native-picker/picker';
 
 
 const {width, height} = Dimensions.get("window")
@@ -17,9 +18,11 @@ const RegisterScreen = () => {
 
     const navigation = useNavigation();
     const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [number, setNumber] = useState("");
     const [aadhaar, setAadhaar] = useState("");
+    const [vehicleType, setVehicleType] = useState("Default");
     const dispatch = useDispatch();
-    const route = useRoute();
     const [image, setImage]=  useState("");
 
     // const photoHandler=()=>{
@@ -56,11 +59,12 @@ const RegisterScreen = () => {
     const submitHandler=()=>{
         dispatch(add_user({
             name: name,
-            email: route.params.email,
-            number: route.params.number,
-            imageUrl: image
+            email: email,
+            number: number,
+            imageUrl: image,
+            vehicleType:vehicleType
         }))
-        navigation.navigate("Verification", {"number": route.params.number})
+        navigation.navigate("Verification", {"email": email})
         
     }
 
@@ -78,7 +82,7 @@ const RegisterScreen = () => {
                 <Text style={{fontSize:20, color:"white", fontFamily:RalewayBold}}>Register</Text>
             </View>
             <View style={styles.content}>
-                <View style={{marginTop:"-8%",width:"80%",flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
+                <View style={{marginTop:"-10%",width:"80%",flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
                     {/* <TouchableOpacity activeOpacity={0.8}
                     onPress={photoHandler}
                     >
@@ -88,9 +92,6 @@ const RegisterScreen = () => {
                         color="#fcb000"
                         />
                     </TouchableOpacity> */}
-                    <View>
-
-                    </View>
                     {image ? 
                     <Image
                     source={{uri: image}}
@@ -103,34 +104,41 @@ const RegisterScreen = () => {
                     color="gray"
                     />
                     }
-                    <TouchableOpacity activeOpacity={0.8}
-                    onPress={cameraHandler}
-                    >
-                        <Entypo
-                        name="camera"
-                        size={30}
-                        color="#fdb916"
-                        />
-                    </TouchableOpacity>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} style={{width:"90%"}}>
                     <View style={{alignItems:"flex-start"}}>
-                        <View style={{borderBottomColor:"gray", borderBottomWidth:1, width:"100%"}}>
-                            <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black"}}>Full Name</Text>
-                            <TextInput
-                            placeholderTextColor="gray"
-                            placeholder="Enter Full Name"
-                            value={name}
-                            onChangeText={(text)=>setName(text)}
-                            keyboardType="default"
-                            style={{fontSize:20, color:"black", fontFamily:RalewaySemiBold}}
-                            />
+                        <View style={{flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
+                            <View style={{borderBottomColor:"gray", borderBottomWidth:1, width:"80%", marginRight:30}}>
+                                <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black"}}>Full Name</Text>
+                                <TextInput
+                                placeholderTextColor="gray"
+                                placeholder="Enter Full Name"
+                                value={name}
+                                onChangeText={(text)=>setName(text)}
+                                keyboardType="default"
+                                style={{fontSize:20, color:"black", fontFamily:RalewaySemiBold}}
+                                />
+                            </View>
+                            <TouchableOpacity activeOpacity={0.8}
+                            onPress={cameraHandler}
+                            >
+                                <Entypo
+                                name="camera"
+                                size={30}
+                                color="#fdb916"
+                                />
+                            </TouchableOpacity>
                         </View>
                         <View style={{borderBottomColor:"gray", borderBottomWidth:1, width:"100%", marginVertical:20}}>
                             <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black"}}>Email Address</Text>
-                            <Text
-                            style={{fontSize:20, color:"gray", paddingVertical:10, fontFamily:RalewaySemiBold}}
-                            >{route.params.email}</Text>
+                            <TextInput
+                            placeholderTextColor="gray"
+                            placeholder="Enter Email Address"
+                            value={email}
+                            onChangeText={(text)=>setEmail(text)}
+                            keyboardType="email-address"
+                            style={{fontSize:20, color:"black", fontFamily:RalewaySemiBold}}
+                            />
                         </View>
                         <View style={{width:"100%", marginBottom:20}}>
                             <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black", marginBottom:5}}>Aadhaar Card</Text>
@@ -142,9 +150,30 @@ const RegisterScreen = () => {
                         </View>
                         <View style={{borderBottomColor:"gray", borderBottomWidth:1, width:"100%"}}>
                             <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black"}}>Phone Number</Text>
-                            <Text
-                            style={{fontSize:20, color:"gray", paddingVertical:10, fontFamily:RalewaySemiBold}}
-                            >{route.params.number}</Text>
+                            <TextInput
+                            placeholderTextColor="gray"
+                            placeholder="Enter Phone Number"
+                            value={number}
+                            onChangeText={(text)=>setNumber(text)}
+                            keyboardType="number-pad"
+                            style={{fontSize:20, color:"black", fontFamily:RalewaySemiBold}}
+                            />
+                        </View>
+                        <View style={{width:"100%", marginBottom:20, marginTop:10}}>
+                            <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black", marginBottom:5}}>Vehicle Type</Text>
+                            <Picker
+                            selectedValue={vehicleType}
+                            dropdownIconColor="black"
+                            style={styles.dropdown}
+                            onValueChange={(itemValue) =>
+                            setVehicleType(itemValue)
+                            }>
+                                <Picker.Item label="Vehicle Type" value="Default"/>
+                                <Picker.Item label="Two-Wheeler" value="Two-Wheeler"/>
+                                <Picker.Item label="Three-Wheeler" value="Three-Wheeler" />
+                                <Picker.Item label="Four-Wheeler" value="Four-Wheeler"/>
+                                <Picker.Item label="Truck" value="Truck"/>
+                            </Picker>
                         </View>
                     </View>
                 </ScrollView>
@@ -191,5 +220,13 @@ const styles = StyleSheet.create({
         position:"absolute",
         bottom:0
     },
+    dropdown:{
+        backgroundColor:"whitesmoke",
+        color:"black",
+        fontSize:15,
+        fontFamily:RalewaySemiBold,
+        elevation:3,
+        marginVertical:10,
+    }
 
 })

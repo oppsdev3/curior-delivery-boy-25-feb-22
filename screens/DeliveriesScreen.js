@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
     },
     content:{
         backgroundColor:"lightgray",
+        opacity:1,
         flex:1,
         borderTopLeftRadius:20,
     }

@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/core';
 import React, {useState} from 'react'
 import { Dimensions, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { RalewayBold, RalewaySemiBold } from '../components/fonts';
+import { RalewayBold, RalewayLight, RalewaySemiBold } from '../components/fonts';
 
 const {width, height} = Dimensions.get("window")
 
@@ -13,13 +13,13 @@ const SignUpScreen = () => {
     const [email, setEmail] = useState("");
 
     const submitHandler=()=>{
-        navigation.navigate("Register", {"number": num, "email": email})
+        navigation.navigate("Verification", {"number": num, "email": email})
     }
 
     return (
         <View style={styles.screen}>
             <View style={styles.header}>
-                <Text style={{fontSize:40, color:"white", fontFamily:RalewayBold}}>Postman 365</Text>
+                <Text style={{fontSize:40, color:"white", fontFamily:RalewayBold}}>Your Postman 24</Text>
             </View>
             <View style={styles.content}>
                 <Text style={{fontSize:22, color:"gray", fontFamily:RalewaySemiBold, marginBottom:20}}>Sign In With Phone Number</Text>
@@ -53,6 +53,15 @@ const SignUpScreen = () => {
                         <Text style={{fontSize:20, color:"white", fontFamily:RalewaySemiBold}}>Confirm</Text>
                     </TouchableOpacity>
                     <Text style={{fontSize:15, color:"gray", textAlign:"center", fontFamily:RalewaySemiBold}}>We'll Send an OTP for Verification!</Text>
+                    <View>
+                        <Text style={{fontFamily:RalewaySemiBold, color:"gray", marginVertical:10, textAlign:"center", fontSize:15}}>Or</Text>
+                        <Text style={{fontFamily:RalewaySemiBold, color:"gray", textAlign:"center", fontSize:15}}>Don't have an Account? Please click the button below</Text>
+                        <TouchableOpacity activeOpacity={0.8} style={styles.button}
+                        onPress={()=>navigation.navigate("Register")}
+                        >
+                            <Text style={{fontSize:20, color:"white", fontFamily:RalewaySemiBold}}>Register</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         </View>

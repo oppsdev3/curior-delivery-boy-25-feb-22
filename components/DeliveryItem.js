@@ -3,7 +3,7 @@ import React from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
 import Entypo from "react-native-vector-icons/Entypo"
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import { RalewayBold, RalewaySemiBold } from './fonts';
+import { RalewayBold, RalewayLight, RalewayRegular, RalewaySemiBold } from './fonts';
 
 const {width} = Dimensions.get("window");
 
@@ -24,18 +24,18 @@ const DeliveryItem = ({imgSrc, title, price, from, to, type, modeOfPayment, butt
                         />
                         <View style={{marginLeft:10}}>
                             <Text style={{fontSize:18, fontFamily:RalewayBold, color:"black"}}>{title}</Text>
-                            <Text style={{fontSize:16, color:"gray", fontFamily:RalewaySemiBold}}>{type}</Text>
+                            <Text style={{fontSize:15, color:"lightgray", fontFamily:RalewaySemiBold}}>{type}</Text>
                             <View style={{marginVertical:10}}>
-                                <Text style={{fontSize:15, color:"gray", marginBottom:5, fontFamily:RalewaySemiBold}}>Payment Mode</Text>
-                                <Text style={{fontSize:14, color:"black", fontWeight:"bold", fontFamily:RalewaySemiBold}}>{modeOfPayment}</Text>
+                                <Text style={{fontSize:14, color:"lightgray", marginBottom:5, fontFamily:RalewaySemiBold}}>Payment Mode</Text>
+                                <Text style={{fontSize:14, color:"black", fontFamily:RalewaySemiBold}}>{modeOfPayment}</Text>
                             </View>
                         </View>
                     </View>
                     <View style={{}}>
-                        <TouchableOpacity activeOpacity={0.8} style={{marginBottom:10,backgroundColor:"#fdb916", padding:10, borderRadius:10, alignItems:"center"}}>
-                            <Text style={{fontSize:15, color:"white", fontFamily:RalewayBold}}>{buttonText}</Text>
+                        <TouchableOpacity activeOpacity={0.8} style={{marginBottom:10,backgroundColor:"#fdb916", padding:10, borderRadius:5, alignItems:"center"}}>
+                            <Text style={{fontSize:15, color:"white", fontFamily:RalewayRegular}}>{buttonText}</Text>
                         </TouchableOpacity>
-                        <Text style={{fontSize:15, color:"gray",marginVertical:5, fontFamily:RalewaySemiBold}}>Payment</Text>
+                        <Text style={{fontSize:15, color:"lightgray",marginVertical:5, fontFamily:RalewaySemiBold}}>Payment</Text>
                         <Text style={{fontSize:16, color:"black", fontFamily:RalewayBold}}>₹ {price}</Text>
                     </View>
                 </View>
@@ -50,7 +50,7 @@ const DeliveryItem = ({imgSrc, title, price, from, to, type, modeOfPayment, butt
                     size={24}
                     color="#fdb916"
                     />
-                    <Text style={{fontSize:16, color:"gray", fontFamily:RalewayBold, marginHorizontal:5}}>......</Text>
+                    <Text style={{fontSize:16, color:"gray", fontFamily:RalewayBold, marginHorizontal:5, marginBottom:10}}>........</Text>
                     <FontAwesome5
                     name="location-arrow"
                     size={20}

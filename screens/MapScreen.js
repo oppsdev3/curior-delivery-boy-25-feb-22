@@ -41,8 +41,8 @@ const MapScreen = () => {
                             <Text style={{fontSize:16, fontFamily:RalewaySemiBold, color:"lightgray"}}>{route.params.type}</Text>
                         </View>
                     </View>
-                    <TouchableOpacity activeOpacity={0.8} style={{marginBottom:10,backgroundColor:"#fdb916", padding:10, borderRadius:10, alignItems:"center"}}>
-                        <Text style={{fontSize:15, color:"white", fontFamily:RalewayBold}}>{route.params.buttonText}</Text>
+                    <TouchableOpacity activeOpacity={0.8} style={{marginBottom:10,backgroundColor:"#fdb916", padding:10, borderRadius:5, alignItems:"center"}}>
+                        <Text style={{fontSize:15, color:"white", fontFamily:RalewayRegular}}>{route.params.buttonText}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

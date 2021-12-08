@@ -58,6 +58,11 @@ const ProfileDetailScreen = () => {
                         <Text
                         style={{fontSize:20, color:"gray", paddingVertical:10}}>{user.number}</Text>
                     </View>
+                    <View style={{borderBottomColor:"gray", borderBottomWidth:1, width:"100%", marginVertical:20}}>
+                        <Text style={{fontSize:20, fontWeight:"bold", color:"black"}}>Vehicle Type</Text>
+                        <Text
+                        style={{fontSize:20, color:"gray", paddingVertical:10}}>{user.vehicleType}</Text>
+                    </View>
                 </View>
             </View>
         </View>

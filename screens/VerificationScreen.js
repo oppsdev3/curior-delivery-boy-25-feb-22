@@ -9,7 +9,7 @@ const {width, height} = Dimensions.get("window")
 const VerificationScreen = () => {
 
     const navigation = useNavigation();
-    const [OTP, setOTP] = useState("");
+    const [code, setCode] = useState("");
     const route = useRoute();
 
     const submitHandler=()=>{
@@ -31,24 +31,24 @@ const VerificationScreen = () => {
                     <Text style={{fontSize:20, color:"white", fontFamily:RalewayBold}}>Verification</Text>
                 </View>
                 <View style={{marginBottom:20}}>
-                    <Text style={{fontSize:20, color:"white", fontFamily:RalewaySemiBold}} numberOfLines={2}>Enter 6 digit verification code sent on {route.params.number}</Text>
+                    <Text style={{fontSize:20, color:"white", fontFamily:RalewaySemiBold}} numberOfLines={2}>Enter 6 digit verification code sent on {route.params.email}</Text>
                 </View>
                 <View style={{flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
                     <Text style={{fontSize:20, color:"white", fontFamily:RalewaySemiBold}}>2:23 min</Text>
                     <TouchableOpacity style={{borderRadius:10, elevation:5, backgroundColor:"whitesmoke", padding:10}} activeOpacity={0.8}>
-                        <Text style={{fontSize:20, color:"#fdb916", fontFamily:RalewayBold}}>Resend OTP</Text>
+                        <Text style={{fontSize:20, color:"#fdb916", fontFamily:RalewayBold}}>Resend Code</Text>
                     </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.content}>
                 <View style={{alignItems:"flex-start", width:"90%", marginVertical:20}}>
                     <View style={{borderBottomColor:"gray", borderBottomWidth:1, width:"100%"}}>
-                        <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black"}}>Enter OTP</Text>
+                        <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black"}}>Enter Verification Code</Text>
                         <TextInput
                         placeholderTextColor="gray"
                         placeholder="Enter 6 Digits Verification Code"
-                        value={OTP}
-                        onChangeText={(text)=>setOTP(text)}
+                        value={code}
+                        onChangeText={(text)=>setCode(text)}
                         keyboardType="number-pad"
                         style={{fontSize:20, color:"black", fontFamily:RalewaySemiBold}}
                         />
