@@ -1,8 +1,11 @@
 import { useNavigation, useRoute } from '@react-navigation/core';
+import axios from 'axios';
 import React, {useState} from 'react'
 import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { RalewayBold, RalewaySemiBold } from '../components/fonts';
+import {useDispatch} from "react-redux";
+import { add_user } from '../redux/userAction';
 
 const {width, height} = Dimensions.get("window")
 
@@ -11,9 +14,26 @@ const VerificationScreen = () => {
     const navigation = useNavigation();
     const [code, setCode] = useState("");
     const route = useRoute();
+    const dispatch =useDispatch();
 
     const submitHandler=()=>{
-        navigation.navigate("Custom")
+        axios.post("https://delivery-boy-api.herokuapp.com/user/activation",{
+            "otpcode": code
+        }).then(res=>{
+            console.log(res.data)
+            dispatch(add_user({
+                name: res.data.user.name,
+                id: res.data.user._id,
+                email: res.data.user.email,
+                number: res.data.user.phoneNo,
+                imageUrl: res.data.user.profileImg,
+                aadhaar: res.data.user.adharImg,
+                vehicleType:res.data.user.vehicleType,
+                token: res.data.access_token
+            }))
+            navigation.navigate("Custom")
+        })
+        .catch((err)=>console.log(err))
     }
 
     return (

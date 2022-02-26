@@ -7,15 +7,22 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from '@react-navigation/core';
 import { RalewayBold, RalewayLight, RalewayRegular, RalewaySemiBold } from '../components/fonts';
+import { useDispatch } from 'react-redux';
+import { remove_user } from '../redux/userAction';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const ProfileScreen = () => {
 
     const user = useSelector((state)=>state.user.user); 
     const navigation = useNavigation();
+    const dispatch = useDispatch();
 
-    const logoutHandler=()=>{
-        navigation.navigate("Language")
+    const logoutHandler=async()=>{
+        dispatch(remove_user());
+        await AsyncStorage.removeItem("token");
+        navigation.replace("Language");
+        console.log(user)
     }
 
     return (

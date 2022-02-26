@@ -1,19 +1,54 @@
 import { useNavigation } from '@react-navigation/core';
-import React, {useState} from 'react'
+import axios from 'axios';
+import React, {useEffect, useState} from 'react'
 import { Dimensions, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { useDispatch } from 'react-redux';
 import { RalewayBold, RalewayLight, RalewaySemiBold } from '../components/fonts';
+import { add_user } from '../redux/userAction';
+import { useSelector } from 'react-redux';
+
 
 const {width, height} = Dimensions.get("window")
 
 const SignUpScreen = () => {
 
     const navigation = useNavigation();
-    const [num, setNum] = useState("");
+    const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+    const user = useSelector((state)=>state.user.user);
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        if(user.length!==0){
+            navigation.navigate("Custom");
+        }
+        else{
+            console.log("No user");
+        }
+    },[user])
 
     const submitHandler=()=>{
-        navigation.navigate("Verification", {"number": num, "email": email})
+        axios.post("https://delivery-boy-api.herokuapp.com/user/login",
+        {
+            "email": email,
+            "password": password
+        }
+        )
+        .then((res)=>{
+            dispatch(add_user({
+                name: res.data.user.name,
+                id: res.data.user._id,
+                email: res.data.user.email,
+                number: res.data.user.phoneNo,
+                imageUrl: res.data.user.profileImg,
+                aadhaar: res.data.user.adharImg,
+                vehicleType:res.data.user.vehicleType,
+                token: res.data.access_token
+            }))
+            navigation.navigate("Custom");
+        })
+        .catch(err=>console.log(err))
     }
 
     return (
@@ -38,13 +73,14 @@ const SignUpScreen = () => {
                 </View>
                 <View style={{width:"90%"}}>
                     <View style={{marginVertical:20}}>
-                        <Text style={{fontFamily:RalewayBold, fontSize:22, color:"black", marginBottom:10}}>Phone Number</Text>
+                        <Text style={{fontFamily:RalewayBold, fontSize:22, color:"black", marginBottom:10}}>Password</Text>
                         <TextInput
-                        placeholder="Enter Phone Number"
+                        placeholder="Enter a Password"
                         placeholderTextColor="gray"
-                        value={num}
-                        onChangeText={(text)=>setNum(text)}
-                        keyboardType="number-pad"
+                        value={password}
+                        onChangeText={(text)=>setPassword(text)}
+                        keyboardType="default"
+                        secureTextEntry={true}
                         style={{borderBottomWidth:1, borderBottomColor:"gray", paddingBottom:10, fontSize:20, color:"black", fontFamily:RalewaySemiBold}}
                         />
                     </View>

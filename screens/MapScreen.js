@@ -33,15 +33,15 @@ const MapScreen = () => {
                 <View style={{flexDirection:"row", alignItems:"center", justifyContent:"space-between", marginVertical:20}}>
                     <View style={{flexDirection:"row", alignItems:"center"}}>
                         <Image
-                        source={route.params.imgSrc}
+                        source={require("../assets/home1.png")}
                         style={{height:50, width:50, resizeMode:"contain"}}
                         />
                         <View style={{marginLeft:10}}>
                             <Text style={{fontSize:18, fontFamily:RalewayBold, color:"black"}}>{route.params.title}</Text>
-                            <Text style={{fontSize:16, fontFamily:RalewaySemiBold, color:"lightgray"}}>{route.params.type}</Text>
+                            <Text style={{fontSize:16, fontFamily:RalewaySemiBold, color:"lightgray"}}>{route.params.serviceType}</Text>
                         </View>
                     </View>
-                    <TouchableOpacity activeOpacity={0.8} style={{marginBottom:10,backgroundColor:"#fdb916", padding:10, borderRadius:5, alignItems:"center"}}>
+                    <TouchableOpacity activeOpacity={0.8} style={{marginBottom:10,backgroundColor:route.params.color, padding:10, borderRadius:5, alignItems:"center"}}>
                         <Text style={{fontSize:15, color:"white", fontFamily:RalewayRegular}}>{route.params.buttonText}</Text>
                     </TouchableOpacity>
                 </View>
@@ -72,7 +72,7 @@ const MapScreen = () => {
                         color="#fdb916"
                         />
                         <View style={{marginLeft:10}}>
-                            <Text style={{fontFamily:RalewayBold, fontSize:18, color:"black"}}>From: {route.params.from}</Text>
+                            <Text style={{fontFamily:RalewayBold, fontSize:18, color:"black"}}>From: {route.params.sendingAddress}</Text>
                             <Text style={{fontFamily:RalewayBold, fontSize:18, color:"black"}}>To: {route.params.to}</Text>
                         </View>
                     </View>
@@ -121,7 +121,7 @@ const MapScreen = () => {
                                         color="#fdb916"
                                         />
                                         <View>
-                                            <Text style={{fontFamily:RalewayBold, fontSize:20, color:"black", marginLeft:10}}>{route.params.from}</Text>
+                                            <Text style={{fontFamily:RalewayBold, fontSize:20, color:"black", marginLeft:10}}>{route.params.sendingAddress}</Text>
                                         </View>
                                     </View>
                                     <TouchableOpacity activeOpacity={0.8} style={{marginTop:5,backgroundColor:"white", borderColor:"#fdb916", borderWidth:1, padding:5, borderRadius:40}}>
@@ -156,7 +156,7 @@ const MapScreen = () => {
                                         <View>
                                             <View style={{marginBottom:20}}>
                                                 <Text style={{fontSize:15, color:"gray", fontFamily:RalewaySemiBold}}>Courier Type</Text>
-                                                <Text style={{fontSize:18, fontFamily:RalewayBold, color:"black", marginTop:10}}>Box Courier</Text>
+                                                <Text style={{fontSize:18, fontFamily:RalewayBold, color:"black", marginTop:10}}>{route.params.CourierType}</Text>
                                             </View>
                                             <View>
                                                 <Text style={{fontSize:15, color:"gray", fontFamily:RalewaySemiBold}}>Height Weight Length</Text>
@@ -166,7 +166,7 @@ const MapScreen = () => {
                                         <View>
                                             <View style={{marginBottom:20}}>
                                                 <Text style={{fontSize:15, color:"gray", fontFamily:RalewaySemiBold}}>Frangible</Text>
-                                                <Text style={{fontSize:18, fontFamily:RalewayBold, color:"black", marginTop:10}}>Yes</Text>
+                                                <Text style={{fontSize:18, fontFamily:RalewayBold, color:"black", marginTop:10}}>{route.params.Frangible}</Text>
                                             </View>
                                             <View>
                                                 <Text style={{fontSize:15, color:"gray", fontFamily:RalewaySemiBold}}>Weight</Text>
@@ -176,15 +176,15 @@ const MapScreen = () => {
                                     </View>
                                     <View style={{marginTop:20}}>
                                         <Text style={{fontSize:15, color:"gray", fontFamily:RalewaySemiBold}}>Courier Info</Text>
-                                        <Text style={{fontSize:15, fontFamily:RalewaySemiBold, color:"black", marginTop:10}}>Birthday Gift containing flower Vaas. Carry carefully as it is frangible.</Text>
+                                        <Text style={{fontSize:15, fontFamily:RalewaySemiBold, color:"black", marginTop:10}}>{route.params.CourierInfo}</Text>
                                     </View>
                                 </View>
                                 <View style={{flexDirection:"row", alignItems: 'center', justifyContent:"space-between", marginVertical:20}}>
                                     <View style={{}}>
-                                        <Text style={{fontSize:18, fontFamily:RalewayBold, color:"black", marginBottom:10}}>{route.params.type}</Text>
+                                        <Text style={{fontSize:18, fontFamily:RalewayBold, color:"black", marginBottom:10}}>{route.params.CourierType}</Text>
                                         <Text style={{fontSize:15, color:"gray", fontFamily:RalewaySemiBold}}>{route.params.modeOfPayment}</Text>
                                     </View>
-                                    <Text style={{fontFamily:RalewayBold, fontSize:22, color:"black"}}>$ {route.params.price}</Text>
+                                    <Text style={{fontFamily:RalewayBold, fontSize:22, color:"black"}}>$ {route.params.Price}</Text>
                                 </View>
                             </ScrollView>
                         </View>

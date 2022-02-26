@@ -3,16 +3,42 @@ import {useNavigation} from "@react-navigation/core"
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome"
 import { RalewayBold, RalewaySemiBold } from '../components/fonts';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { add_user } from '../redux/userAction';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 const LanguageScreen = () => {
 
     const navigation = useNavigation();
     const [lang, setLang] = useState("English");
+    const dispatch = useDispatch()
 
-    const submitHandler=()=>{
+    const submitHandler=async()=>{
+        const token = await AsyncStorage.getItem("token");
+        console.log(token);
+        if(token){
+        axios.get('https://delivery-boy-api.herokuapp.com/user/infor',
+        {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${token}`,
+        }}
+        ).then((res)=>{
+            dispatch(add_user({
+                name: res.data.name,
+                id: res.data._id,
+                email: res.data.email,
+                number: res.data.phoneNo,
+                imageUrl: res.data.profileImg,
+                aadhaar: res.data.adharImg,
+                vehicleType:res.data.vehicleType,
+                token: token
+            }))
+        })
+        .catch((err)=>console.log(err.message))}
         console.log(`Language is ${lang}`)
         navigation.navigate("SignUp")
-
     }
 
     return (

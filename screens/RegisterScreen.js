@@ -5,11 +5,11 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import FontAwesome from "react-native-vector-icons/FontAwesome"
 import Entypo from "react-native-vector-icons/Entypo";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import {useDispatch} from "react-redux"
-import { add_user } from '../redux/userAction';
 import ImagePicker from 'react-native-image-crop-picker';
 import { RalewayBold, RalewaySemiBold } from '../components/fonts';
 import { Picker } from '@react-native-picker/picker';
+import axios from "axios";
+
 
 
 const {width, height} = Dimensions.get("window")
@@ -21,19 +21,19 @@ const RegisterScreen = () => {
     const [email, setEmail] = useState("");
     const [number, setNumber] = useState("");
     const [aadhaar, setAadhaar] = useState("");
+    const [password, setPassword] = useState("");
     const [vehicleType, setVehicleType] = useState("Default");
-    const dispatch = useDispatch();
     const [image, setImage]=  useState("");
 
-    // const photoHandler=()=>{
-    //     ImagePicker.openPicker({
-    //         width: 400,
-    //         height: 400,
-    //         cropping: true
-    //       }).then(image => {
-    //         setImage(image.path)
-    //       });
-    // }
+    const photoHandler=()=>{
+        ImagePicker.openPicker({
+            width: 400,
+            height: 400,
+            cropping: true
+          }).then(image => {
+            setImage(image.path)
+          });
+    }
 
     const aadhaarCardHandler=()=>{
         ImagePicker.openPicker({
@@ -57,15 +57,21 @@ const RegisterScreen = () => {
 
 
     const submitHandler=()=>{
-        dispatch(add_user({
-            name: name,
-            email: email,
-            number: number,
-            imageUrl: image,
-            vehicleType:vehicleType
-        }))
-        navigation.navigate("Verification", {"email": email})
-        
+        axios.post("https://delivery-boy-api.herokuapp.com/user/register",
+        {
+            "name":name,
+            "email":email,
+            "password":password,
+            "phoneNo":number, 
+            "profileImg": image,
+            "adharImg":aadhaar,
+            "vehicleType":vehicleType
+        })
+        .then((res)=>{
+            console.log(res);
+            navigation.navigate("Verification", {"email": email})
+        })
+        .catch((err)=>console.log(err))    
     }
 
     return (
@@ -82,8 +88,8 @@ const RegisterScreen = () => {
                 <Text style={{fontSize:20, color:"white", fontFamily:RalewayBold}}>Register</Text>
             </View>
             <View style={styles.content}>
-                <View style={{marginTop:"-10%",width:"80%",flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
-                    {/* <TouchableOpacity activeOpacity={0.8}
+                <View style={{marginTop:"-10%",width:"80%",flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
+                    <TouchableOpacity activeOpacity={0.8}
                     onPress={photoHandler}
                     >
                         <FontAwesome
@@ -91,7 +97,7 @@ const RegisterScreen = () => {
                         size={30}
                         color="#fcb000"
                         />
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>
                     {image ? 
                     <Image
                     source={{uri: image}}
@@ -104,6 +110,15 @@ const RegisterScreen = () => {
                     color="gray"
                     />
                     }
+                    <TouchableOpacity activeOpacity={0.8}
+                            onPress={cameraHandler}
+                            >
+                                <Entypo
+                                name="camera"
+                                size={30}
+                                color="#fdb916"
+                                />
+                            </TouchableOpacity>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} style={{width:"90%"}}>
                     <View style={{alignItems:"flex-start"}}>
@@ -119,15 +134,6 @@ const RegisterScreen = () => {
                                 style={{fontSize:20, color:"black", fontFamily:RalewaySemiBold}}
                                 />
                             </View>
-                            <TouchableOpacity activeOpacity={0.8}
-                            onPress={cameraHandler}
-                            >
-                                <Entypo
-                                name="camera"
-                                size={30}
-                                color="#fdb916"
-                                />
-                            </TouchableOpacity>
                         </View>
                         <View style={{borderBottomColor:"gray", borderBottomWidth:1, width:"100%", marginVertical:20}}>
                             <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black"}}>Email Address</Text>
@@ -137,6 +143,18 @@ const RegisterScreen = () => {
                             value={email}
                             onChangeText={(text)=>setEmail(text)}
                             keyboardType="email-address"
+                            style={{fontSize:20, color:"black", fontFamily:RalewaySemiBold}}
+                            />
+                        </View>
+                        <View style={{borderBottomColor:"gray", borderBottomWidth:1, width:"100%"}}>
+                            <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black"}}>Password</Text>
+                            <TextInput
+                            placeholderTextColor="gray"
+                            secureTextEntry={true}
+                            placeholder="Enter a Password"
+                            value={password}
+                            onChangeText={(text)=>setPassword(text)}
+                            keyboardType="default"
                             style={{fontSize:20, color:"black", fontFamily:RalewaySemiBold}}
                             />
                         </View>
@@ -159,7 +177,7 @@ const RegisterScreen = () => {
                             style={{fontSize:20, color:"black", fontFamily:RalewaySemiBold}}
                             />
                         </View>
-                        <View style={{width:"100%", marginBottom:20, marginTop:10}}>
+                        <View style={{width:"100%", marginBottom:100, marginTop:10}}>
                             <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black", marginBottom:5}}>Vehicle Type</Text>
                             <Picker
                             selectedValue={vehicleType}

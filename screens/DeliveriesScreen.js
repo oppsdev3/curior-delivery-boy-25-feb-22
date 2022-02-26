@@ -1,11 +1,24 @@
-import React, {useState} from 'react'
+import axios from 'axios';
+import React, {useEffect, useState} from 'react'
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { useSelector } from 'react-redux';
+import DeliveredItem from '../components/DeliveredItem';
 import DeliveryItem from '../components/DeliveryItem';
 import { RalewayBold, RalewaySemiBold } from '../components/fonts';
 
 const DeliveriesScreen = () => {
 
     const [click, setClick] = useState("New Deliveries");
+    const deliverd = useSelector((state)=>state.product.product); 
+    const [data, setData] = useState([]);
+
+    useEffect(()=>{
+        axios.get("https://delivery-boy-api.herokuapp.com/api/product")
+        .then((res)=>{
+            setData(res.data)
+        })
+        .catch((err)=>console.log(err))
+    },[data])
 
     return (
         <View style={styles.screen}>
@@ -25,93 +38,52 @@ const DeliveriesScreen = () => {
             <View style={styles.content}>
                 <Text style={{fontSize:18, color:"gray", padding:20, fontFamily:RalewaySemiBold}}>3 Active Deliveries</Text>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <DeliveryItem
-                    title="Courier"
-                    imgSrc={require("../assets/home1.png")}
-                    price="8.50"
-                    type="Economy Delivery"
-                    buttonText="Marked Picked"
-                    from="28 Mott Street."
-                    to="St. Merry Church"
-                    modeOfPayment="Cash On Pickup"
-                    />
-                    <DeliveryItem
-                    title="Food"
-                    imgSrc={require("../assets/home2.png")}
-                    price="13.50"
-                    type="Express Delivery"
-                    buttonText="Marked Picked"
-                    from="Silver Leaf Restaurant"
-                    to="Hemilton Road"
-                    modeOfPayment="Paypal"
-                    />
-                    <DeliveryItem
-                    title="Grocery"
-                    imgSrc={require("../assets/home3.png")}
-                    price="5.50"
-                    from="7-11 Grocery Mart"
-                    type="Economy Delivery"
-                    buttonText="Marked Picked"
-                    to="Hemilton Road"
-                    modeOfPayment="Paypal"
-                    />
-                    <DeliveryItem
-                    title="Courier"
-                    imgSrc={require("../assets/home1.png")}
-                    price="8.50"
-                    type="Economy Delivery"
-                    buttonText="Marked Picked"
-                    from="28 Mott Street."
-                    to="St. Merry Church"
-                    modeOfPayment="Cash On Pickup"
-                    />
+                    {data.map((item)=>(
+                        <DeliveryItem
+                        key={item._id}
+                        id={item._id}
+                        deliveryaccepted={item.deliveryaccepted}
+                        title={item.category}
+                        imgSrc={item.image}
+                        deliveryitem={item.deliveryitem}
+                        to={item.addresstodeli}
+                        pickedStatus={item.pickedStatus}
+                        deliveryStatus={item.deliveredStatus}
+                        modeOfPayment={item.paymentMode}
+                        CourierType={item.CourierType}
+                        CourierInfo={item.CourierInfo}
+                        Frangible={item.Frangible}
+                        sendingAddress={item.sendingAddress}
+                        Price={item.Price}
+                        serviceType={item.serviceType}
+                        />
+                    ))}
                 </ScrollView>
             </View>
             :
             <View style={styles.content}>
                 <Text style={{fontSize:18, color:"gray", padding:20, fontFamily:RalewaySemiBold}}>Past Deliveries</Text>
+                {(deliverd.length!==0) ? 
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <DeliveryItem
-                    title="Courier"
-                    imgSrc={require("../assets/home1.png")}
-                    price="8.50"
-                    type="Economy Delivery"
-                    from="28 Mott Street."
-                    buttonText="Delivered"
-                    to="St. Merry Church"
-                    modeOfPayment="Cash On Pickup"
-                    />
-                    <DeliveryItem
-                    title="Food"
-                    imgSrc={require("../assets/home2.png")}
-                    price="13.50"
-                    type="Express Delivery"
-                    from="Silver Leaf Restaurant"
-                    buttonText="Delivered"
-                    to="Hemilton Road"
-                    modeOfPayment="Paypal"
-                    />
-                    <DeliveryItem
-                    title="Grocery"
-                    buttonText="Delivered"
-                    imgSrc={require("../assets/home3.png")}
-                    price="5.50"
-                    from="7-11 Grocery Mart"
-                    type="Economy Delivery"
-                    to="Hemilton Road"
-                    modeOfPayment="Paypal"
-                    />
-                    <DeliveryItem
-                    title="Courier"
-                    imgSrc={require("../assets/home1.png")}
-                    price="8.50"
-                    type="Economy Delivery"
-                    from="28 Mott Street."
-                    buttonText="Delivered"
-                    to="St. Merry Church"
-                    modeOfPayment="Cash On Pickup"
-                    />
+                    {deliverd.map((item)=>(
+                        <DeliveredItem
+                        key={item.id}
+                        id={item.id}
+                        title={item.title}
+                        Price={item.Price}
+                        sendingAddress={item.sendingAddress}
+                        serviceType={item.serviceType}
+                        CourierType={item.CourierType}
+                        CourierInfo={item.CourierInfo}
+                        Frangible={item.Frangible}
+                        to={item.to}
+                        modeOfPayment={item.modeOfPayment}
+                        />
+                    ))}
                 </ScrollView>
+                :
+                <Text style={{fontFamily:RalewayBold, fontSize:20, color:"black", textAlign:"center", marginTop:100}}>Sorry, No Order Delivered:(</Text>
+                }
             </View>}
         </View>
     )

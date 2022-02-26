@@ -1,5 +1,5 @@
-import React from 'react'
-import { StyleSheet,View, Text, TouchableOpacity, TextInput} from 'react-native'
+import React, {useState} from 'react'
+import { StyleSheet,View, Text, TouchableOpacity, TextInput, ScrollView} from 'react-native'
 import { useSelector } from 'react-redux'
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from '@react-navigation/core';
@@ -9,10 +9,12 @@ import { RalewayBold, RalewayRegular, RalewaySemiBold } from '../components/font
 const ContactScreen = () => {
 
     const navigation = useNavigation();
-    const user = useSelector((state)=>state.user.user); 
+    const user = useSelector((state)=>state.user.user);
+    const [message, setMessaage] = useState(""); 
+    const [headline, setHeadline] = useState(false);
 
     const submitHandler=()=>{
-
+        setHeadline(true);
     }
 
     return (
@@ -29,7 +31,7 @@ const ContactScreen = () => {
             </View>
             <View style={styles.content}>
                 <Text style={{fontSize:20, fontFamily:RalewaySemiBold, color:"black", marginBottom:20}}>Let us know your feedback, queries or issue regarding app or features.</Text>
-                <View style={{}}>
+                <ScrollView showsVerticalScrollIndicator={false} style={{marginBottom:70}}>
                     <View style={{borderBottomColor:"gray", borderBottomWidth:1, width:"100%"}}>
                         <Text style={{fontSize:20, fontFamily:RalewayBold, color:"black"}}>Full Name</Text>
                         <Text
@@ -47,11 +49,17 @@ const ContactScreen = () => {
                         <TextInput
                         placeholderTextColor="gray"
                         placeholder="Enter your message"
+                        value={message}
+                        onChangeText={(text)=>setMessaage(text)}
                         keyboardType="default"
                         style={{fontSize:20, color:"black", fontFamily:RalewayRegular}}
                         />
                     </View>
-                </View>
+                    {headline && 
+                    <View style={{marginVertical:20}}>
+                        <Text style={{color:"red", fontFamily:RalewayRegular, fontSize:15, textAlign:"center"}}>Hello {user.name}! We got your message and we would be getting back to you ASAP!</Text>
+                    </View>}
+                </ScrollView>
                 <TouchableOpacity activeOpacity={0.8} style={styles.button}
                 onPress={submitHandler}>
                     <Text style={{fontSize:20, color:"white", fontFamily:RalewaySemiBold}}>Send</Text>
